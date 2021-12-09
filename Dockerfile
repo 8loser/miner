@@ -12,6 +12,7 @@ RUN apk update && apk upgrade \
 	libtool \
 	autoconf \
 	linux-headers \
+	&& apk add --no-cache tzdata \
 	&& git clone https://github.com/xmrig/xmrig.git \
 	&& sed -i -r 's/(DonateLevel\s?=\s?)\d+/\10/g' xmrig/src/donate.h \
 	&& mkdir xmrig/build \
@@ -21,3 +22,5 @@ RUN apk update && apk upgrade \
 	&& cp xmrig /bin && cd / \
 	&& rm -rf /xmrig /var/cache/apk/* \
 	&& apk del .build-deps
+
+ENV TZ=Asia/Taipei
